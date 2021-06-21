@@ -1,0 +1,17 @@
+#cloud-config
+ssh_pwauth: yes
+users:
+  - default
+  - name: centos
+    ssh_authorized_keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDH8Go3fLlRi4GX2AamkdtjRv3UJf7YLK+Q+8DU8ec4XotkJ1oAtfk5HMsFAeIVP+VK0lh5EnwdJGYK2BaHbFScVE1eVGUPKveTx0C2+7SMCReAUAwyfdhgIK/YAOkRH2PiArXujdyeYo7MQOC5RhqruUwnS1ialNFhysoMDhC24o0SnnyoPrxWlBMv49SFQav+YDUwweZvyIYNCOfSfESRzGKvwfTfhHyPOweuCYg7a0V42YFiQR4BfLRihG2MJT/D19hi8gN9Hk0ScFfh+yZLQqXoq8eZtIF/cbkBBYKvKkg3ZO+1qcTyAuSsZIIO9W0qFbrQw9KiNJ65wzgiqJlH
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    groups: sudo
+    shell: /bin/bash
+network:
+  version: 2
+  ethernets:
+      ens192:
+          dhcp4: true
+runcmd:
+  - "echo -e 'Centos VM built by VM Operator on '`date` >> /etc/motd"

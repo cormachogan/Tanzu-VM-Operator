@@ -1,0 +1,26 @@
+apiVersion: vmoperator.vmware.com/v1alpha1
+kind: VirtualMachine
+metadata:
+  name: centos-vm
+  namespace: cormac-ns
+spec:
+  networkInterfaces:
+  - networkName: "workload-network-1"
+    networkType: vsphere-distributed
+  className: best-effort-small
+  imageName: centos-stream-8-vmservice-v1alpha1-1619529007339
+  powerState: poweredOn
+  storageClass: r5
+  vmMetadata:
+    configMapName: centos-vm-cfm
+    transport: OvfEnv
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: centos-vm-cfm
+    namespace: cormac-ns
+data:
+  user-data: |
+    I2Nsb3VkLWNvbmZpZwpzc2hfcHdhdXRoOiB5ZXMKdXNlcnM6CiAgLSBkZWZhdWx0CiAgLSBuYW1lOiBjZW50b3MKICAgIHNzaF9hdXRob3JpemVkX2tleXM6CiAgICAgIC0gc3NoLXJzYSBBQUFBQjNOemFDMXljMkVBQUFBREFRQUJBQUFCQVFESDhHbzNmTGxSaTRHWDJBYW1rZHRqUnYzVUpmN1lMSytRKzhEVThlYzRYb3RrSjFvQXRmazVITXNGQWVJVlArVkswbGg1RW53ZEpHWUsyQmFIYkZTY1ZFMWVWR1VQS3ZlVHgwQzIrN1NNQ1JlQVVBd3lmZGhnSUsvWUFPa1JIMlBpQXJYdWpkeWVZbzdNUU9DNVJocXJ1VXduUzFpYWxORmh5c29NRGhDMjRvMFNubnlvUHJ4V2xCTXY0OVNGUWF2K1lEVXd3ZVp2eUlZTkNPZlNmRVNSekdLdndmVGZoSHlQT3dldUNZZzdhMFY0MllGaVFSNEJmTFJpaEcyTUpUL0QxOWhpOGdOOUhrMFNjRmZoK3laTFFxWG9xOGVadElGL2Nia0JCWUt2S2tnM1pPKzFxY1R5QXVTc1pJSU85VzBxRmJyUXc5S2lOSjY1d3pnaXFKbEgKICAgIHN1ZG86IEFMTD0oQUxMKSBOT1BBU1NXRDpBTEwKICAgIGdyb3Vwczogc3VkbwogICAgc2hlbGw6IC9iaW4vYmFzaApuZXR3b3JrOgogIHZlcnNpb246IDIKICBldGhlcm5ldHM6CiAgICAgIGVuczE5MjoKICAgICAgICAgIGRoY3A0OiB0cnVlCnJ1bmNtZDoKICAtICJlY2hvIC1lICdDZW50b3MgVk0gYnVpbHQgYnkgVk0gT3BlcmF0b3Igb24gJ2BkYXRlYCA+PiAvZXRjL21vdGQiCg==
+  hostname: centos-vm
